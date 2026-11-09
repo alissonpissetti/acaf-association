@@ -1,0 +1,19 @@
+.assoc-loading-screen,
+.assoc-forbidden-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.assoc-forbidden-page h1 {
+  margin: 0 0 12px;
+}
+
+.assoc-forbidden-page p {
+  margin: 0 0 20px;
+  max-width: 42ch;
+  color: var(--text-muted);
+  line-height: 1.5;
+}

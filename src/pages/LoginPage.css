@@ -1,0 +1,224 @@
+/* Login — split roxo + formulário (alinhado ao portal corporativo) */
+
+.assoc-login-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(400px, 520px);
+  background: var(--surface);
+}
+
+/* Coluna de marca */
+.assoc-login-brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 12px 0 12px 12px;
+  padding: clamp(32px, 5vw, 72px);
+  border-radius: var(--radius-lg);
+  background: var(--movly-purple);
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.assoc-login-brand > * {
+  position: relative;
+  z-index: 1;
+}
+
+.assoc-login-lockup {
+  margin: auto 0;
+}
+
+.assoc-login-brand-wordmark.brand-logo {
+  width: min(100%, 420px);
+  max-width: min(100%, 420px);
+  height: auto;
+  aspect-ratio: 791 / 386;
+  padding: 0;
+  justify-content: flex-start;
+}
+
+.assoc-login-tagline {
+  margin: 18px 0 0;
+  padding-left: 0.4%;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.8vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--movly-lime);
+}
+
+.assoc-login-tagline-highlight {
+  font-weight: 700;
+}
+
+.assoc-login-foot {
+  margin: clamp(24px, 4vw, 40px) 0 0;
+  max-width: 42ch;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.84);
+}
+
+/* Coluna do formulário */
+.assoc-login-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 48px;
+}
+
+.assoc-login-panel-inner {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+.assoc-login-panel-title {
+  margin: 44px 0 8px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: var(--foreground);
+}
+
+.assoc-login-panel-lead {
+  margin: 0 0 28px;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--foreground-secondary);
+}
+
+.assoc-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.assoc-login-form .field label {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--foreground-secondary);
+}
+
+.assoc-login-form .field input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  font-size: 0.9375rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.assoc-login-form .field input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.assoc-login-form-error {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: #b42318;
+  background: #fef3f2;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+}
+
+.password-input-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.assoc-login-form .field .password-input-wrap > input {
+  padding-right: 2.75rem;
+}
+
+.password-input-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--foreground-secondary);
+  cursor: pointer;
+}
+
+.password-input-toggle:hover:not(:disabled) {
+  background: var(--surface-muted);
+  color: var(--foreground);
+}
+
+.password-input-toggle:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.assoc-login-submit {
+  width: 100%;
+  padding: 14px 16px;
+  margin-top: 6px;
+  font-size: 0.9375rem;
+}
+
+.assoc-login-foot-panel {
+  margin: 32px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.assoc-login-foot-panel code {
+  font-size: 0.75rem;
+  padding: 0.1em 0.35em;
+  border-radius: 6px;
+  background: var(--surface-muted);
+  color: var(--foreground-secondary);
+}
+
+@media (max-width: 960px) {
+  .assoc-login-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .assoc-login-brand {
+    margin: 12px 12px 0;
+    min-height: 220px;
+    padding: 28px;
+  }
+
+  .assoc-login-brand-wordmark.brand-logo {
+    width: min(70%, 300px);
+  }
+
+  .assoc-login-panel {
+    align-items: flex-start;
+    padding: 32px 24px 40px;
+  }
+
+  .assoc-login-panel-title {
+    margin-top: 28px;
+  }
+}
