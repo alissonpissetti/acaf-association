@@ -1,5 +1,8 @@
 import { getToken } from './auth';
+import { ASSOCIATION_SLUG } from '../associationConfig';
 import { apiUrl, parseApiError } from './http';
+
+const PORTAL_API_PREFIX = `/api/association-portal/${encodeURIComponent(ASSOCIATION_SLUG)}`;
 
 export type AcafAssociateMetaDto = {
   cnpj: string;
@@ -47,11 +50,11 @@ async function authFetch<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export function listAcafAssociateUnits(): Promise<AssociatePartnerUnit[]> {
-  return authFetch('/api/acaf-association/units');
+  return authFetch(`${PORTAL_API_PREFIX}/units`);
 }
 
 export function getAcafAssociateUnit(id: string): Promise<AssociatePartnerUnit> {
-  return authFetch(`/api/acaf-association/units/${encodeURIComponent(id)}`);
+  return authFetch(`${PORTAL_API_PREFIX}/units/${encodeURIComponent(id)}`);
 }
 
 export function patchAcafAssociateUnit(
@@ -65,7 +68,7 @@ export function patchAcafAssociateUnit(
     >;
   },
 ): Promise<AssociatePartnerUnit> {
-  return authFetch(`/api/acaf-association/units/${encodeURIComponent(id)}`, {
+  return authFetch(`${PORTAL_API_PREFIX}/units/${encodeURIComponent(id)}`, {
     method: 'PATCH',
     body: JSON.stringify(body),
   });

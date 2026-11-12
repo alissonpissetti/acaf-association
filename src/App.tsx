@@ -7,7 +7,9 @@ import { LoginPage } from './pages/LoginPage';
 import { PartnersPage } from './pages/PartnersPage';
 import { PartnerDetailPage } from './pages/PartnerDetailPage';
 
-const PERM = 'associacao.acaf.parceiros';
+import { associationPartnersPermission } from './associationConfig';
+
+const PERM = associationPartnersPermission();
 
 function Protected({ children }: { children: ReactNode }) {
   const { user, loading, hasPermission } = useAssociation();
@@ -28,7 +30,7 @@ function Protected({ children }: { children: ReactNode }) {
     return (
       <div className="assoc-forbidden-page">
         <h1>Acesso restrito</h1>
-        <p>Peça ao administrador a permissão «Parceiros associados» (associacao.acaf.parceiros) para o seu grupo.</p>
+        <p>Peça ao administrador a liberação de acesso a este painel.</p>
         <button type="button" className="btn btn-primary" onClick={() => (window.location.href = '/login')}>
           Sair e tentar outra conta
         </button>

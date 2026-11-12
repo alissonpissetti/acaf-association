@@ -12,8 +12,12 @@ import {
   getMe,
   getToken,
   login as apiLogin,
+  loginWithOtp as apiLoginWithOtp,
+  requestOtp as apiRequestOtp,
+  resetPasswordWithOtp as apiResetPasswordWithOtp,
   setToken,
   type AssociationAdminUser,
+  type OtpPurpose,
 } from './api/auth';
 
 type AssociationContextValue = {
@@ -21,6 +25,13 @@ type AssociationContextValue = {
   permissions: string[];
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
+  loginWithOtp: (mobilePhone: string, code: string) => Promise<void>;
+  requestOtp: (mobilePhone: string, purpose: OtpPurpose) => Promise<{ ok: boolean; message?: string }>;
+  resetPasswordWithOtp: (
+    mobilePhone: string,
+    code: string,
+    newPassword: string,
+  ) => Promise<{ ok: boolean; message?: string }>;
   logout: () => void;
   refreshProfile: () => Promise<void>;
   hasPermission: (key: string) => boolean;
@@ -79,6 +90,26 @@ export function AssociationProvider({ children }: { children: ReactNode }) {
     [applyProfile],
   );
 
+  const loginWithOtp = useCallback(
+    async (mobilePhone: string, code: string) => {
+      const result = await apiLoginWithOtp(mobilePhone, code);
+      setToken(result.accessToken);
+      applyProfile(result.user as AssociationAdminUser);
+    },
+    [applyProfile],
+  );
+
+  const requestOtp = useCallback(
+    (mobilePhone: string, purpose: OtpPurpose) => apiRequestOtp(mobilePhone, purpose),
+    [],
+  );
+
+  const resetPasswordWithOtp = useCallback(
+    (mobilePhone: string, code: string, newPassword: string) =>
+      apiResetPasswordWithOtp(mobilePhone, code, newPassword),
+    [],
+  );
+
   const hasPermission = useCallback((key: string) => permissions.includes(key), [permissions]);
 
   const value = useMemo(
@@ -87,11 +118,25 @@ export function AssociationProvider({ children }: { children: ReactNode }) {
       permissions,
       loading,
       login,
+      loginWithOtp,
+      requestOtp,
+      resetPasswordWithOtp,
       logout,
       refreshProfile,
       hasPermission,
     }),
-    [user, permissions, loading, login, logout, refreshProfile, hasPermission],
+    [
+      user,
+      permissions,
+      loading,
+      login,
+      loginWithOtp,
+      requestOtp,
+      resetPasswordWithOtp,
+      logout,
+      refreshProfile,
+      hasPermission,
+    ],
   );
 
   return <AssociationContext.Provider value={value}>{children}</AssociationContext.Provider>;

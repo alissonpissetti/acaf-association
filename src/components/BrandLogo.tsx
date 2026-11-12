@@ -25,7 +25,7 @@ export function BrandLogo({
   const classes = ['brand-logo', 'brand-logo--img', `brand-logo--${variant}`, className].filter(Boolean).join(' ');
 
   return (
-    <span className={classes} role="img" aria-label="movly. by ACAF" style={style}>
+    <span className={classes} role="img" aria-label="movly. by ACAF Brasil" style={style}>
       <img className="brand-logo-img" src={src} alt="" width={dims.width} height={dims.height} decoding="async" />
     </span>
   );
